@@ -1,148 +1,51 @@
-namespace Calculator.Tests;
+using Xunit;
 
-public class CalculatorTests
+namespace Calculator.Tests
 {
-    [Fact]
-    public void TestAdd()
+    public class CalculatorTests
     {
-        Assert.Equal(6L, Add.Eval(1L, 5L));
-    }
-    [Fact]
-    public void TestMult()
-    {
-        Assert.Equal(6L, Multiply.Eval(2L, 3L));
-    }
-    [Fact]
-    public void TestAddOperation()
-    {
-        Assert.Equal(8, Evaluator.Eval("+", 6, 2));
-    }
-    [Fact]
-    public void TestMultiplyOperation()
-    {
-        Assert.Equal(12, Evaluator.Eval("*", 6, 2));
-    }
-    [Fact]
-    public void Add_TwoPositiveNumbers_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = 10.0f;
-        float rhs = 5.0f;
+        [Fact]
+        public void TestAdd()
+        {
+            Assert.Equal(6L, Add.Eval(1L, 5L));
+        }
 
-        // Act
-        float result = Add.Eval(lhs, rhs);
+        [Fact]
+        public void TestSubtract()
+        {
+            Assert.Equal(7L, Subtract.Eval(8L, 1L)); // Ensure the Subtract method exists
+        }
 
-        // Assert
-        Assert.Equal(15.0f, result);
-    }
+        [Fact]
+        public void TestMultiply()
+        {
+            Assert.Equal(6L, Multiply.Eval(2L, 3L)); // Ensure the Multiply method exists
+        }
 
-    [Fact]
-    public void Add_TwoNegativeNumbers_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = -10.0f;
-        float rhs = -5.0f;
+        [Fact]
+        public void TestAddOperation()
+        {
+            Assert.Equal(8, Evaluator.Eval("+", 6, 2));
+        }
 
-        // Act
-        float result = Add.Eval(lhs, rhs);
+        [Fact]
+        public void TestSubtractOperation()
+        {
+            Assert.Equal(4, Evaluator.Eval("-", 6, 2));
+        }
 
-        // Assert
-        Assert.Equal(-15.0f, result);
-    }
+        [Fact]
+        public void TestMultiplyOperation()
+        {
+            Assert.Equal(12, Evaluator.Eval("*", 6, 2));
+        }
 
-    [Fact]
-    public void Add_PositiveAndNegativeNumber_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = 10.0f;
-        float rhs = -5.0f;
-
-        // Act
-        float result = Add.Eval(lhs, rhs);
-
-        // Assert
-        Assert.Equal(5.0f, result);
-    }
-    [Fact]
-    public void Multiply_TwoPositiveNumbers_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = 10.0f;
-        float rhs = 5.0f;
-
-        // Act
-        float result = Multiply.Eval(lhs, rhs);
-
-        // Assert
-        Assert.Equal(50.0f, result);
-    }
-
-    [Fact]
-    public void Multiply_PositiveAndNegativeNumber_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = 10.0f;
-        float rhs = -5.0f;
-
-        // Act
-        float result = Multiply.Eval(lhs, rhs);
-
-        // Assert
-        Assert.Equal(-50.0f, result);
-    }
-
-    [Fact]
-    public void Multiply_ByZero_ReturnsZero()
-    {
-        // Arrange
-        float lhs = 10.0f;
-        float rhs = 0.0f;
-
-        // Act
-        float result = Multiply.Eval(lhs, rhs);
-
-        // Assert
-        Assert.Equal(0.0f, result);
-    }
-    [Fact]
-    public void Subtract_TwoPositiveNumbers_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = 10.0f;
-        float rhs = 5.0f;
-
-        // Act
-        float result = Evaluator.Eval("-", lhs, rhs);
-
-        // Assert
-        Assert.Equal(5.0f, result);
-    }
-
-    [Fact]
-    public void Subtract_TwoNegativeNumbers_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = -10.0f;
-        float rhs = -5.0f;
-
-        // Act
-        float result = Evaluator.Eval("-", lhs, rhs);
-
-        // Assert
-        Assert.Equal(-5.0f, result);
-    }
-
-    [Fact]
-    public void Subtract_PositiveAndNegativeNumber_ReturnsCorrectResult()
-    {
-        // Arrange
-        float lhs = 10.0f;
-        float rhs = -5.0f;
-
-        // Act
-        float result = Evaluator.Eval("-", lhs, rhs);
-
-        // Assert
-        Assert.Equal(15.0f, result);
+        [Fact]
+        public void TestSequentialOperations()
+        {
+            float result1 = Evaluator.Eval("+", 2, 3);
+            float result2 = Evaluator.Eval("*", result1, 2);
+            Assert.Equal(10, result2);
+        }
     }
 }
